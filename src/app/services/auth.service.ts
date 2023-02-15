@@ -1,34 +1,57 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenResponse } from '../dtos/tokenresponse';
-
-const API_URL = 'http://localhost:8081';
+import { ApiService } from './api.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private apiService: ApiService,
+    private storageService: StorageService
+  ) {}
 
   login(email: string, password: string) {
-    return this.http.post<TokenResponse>(API_URL + '/oauth/login', {
-      email,
-      password,
-    });
+    this.apiService
+      .login(email, password)
+      .subscribe((tokenResponse: TokenResponse) => {
+        const token = tokenResponse.token;
+        const tokenType = tokenResponse.tokenType;
+
+        this.storageService.setToken(token);
+        this.storageService.setTokenType(tokenType);
+      });
   }
 
   register(email: string, password: string) {
-    return this.http.post(API_URL + '/oauth/register', {
-      email,
-      password,
-    });
+    this.apiService
+      .register(email, password)
+      .subscribe((tokenResponse: TokenResponse) => {
+        const token = tokenResponse.token;
+        const tokenType = tokenResponse.tokenType;
+
+        this.storageService.setToken(token);
+        this.storageService.setTokenType(tokenType);
+      });
   }
 
-  logout() {}
+  refreshToken() {
+    const token = this.storageService.getToken() as string;
 
-  refreshToken(token: string) {
-    return this.http.post(API_URL + '/oauth/refresh', {
-      token: token,
-    });
+    this.apiService
+      .refreshToken(token)
+      .subscribe((tokenResponse: TokenResponse) => {
+        const token = tokenResponse.token;
+        const tokenType = tokenResponse.tokenType;
+
+        this.storageService.setToken(token);
+        this.storageService.setTokenType(tokenType);
+      });
+  }
+
+  logout() {
+    this.storageService.removeToken();
   }
 }

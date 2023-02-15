@@ -29,14 +29,6 @@ export class LoginFormComponent implements OnInit {
     const email = this.loginForm.get('email')?.value as string;
     const password = this.loginForm.get('password')?.value as string;
 
-    this.authService
-      .login(email, password)
-      .subscribe((tokenResponse: TokenResponse) => {
-        const token = tokenResponse.token;
-        const tokenType = tokenResponse.tokenType;
-
-        this.storageService.setToken(token);
-        this.storageService.setTokenType(tokenType);
-      });
+    this.authService.login(email, password);
   }
 }
