@@ -1,7 +1,7 @@
-<div class="loginForm">
+<div class="authForm">
   <h1>Log into your Account</h1>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill" class="mat-form-field">
+    <mat-form-field appearance="fill" class="auth-form-field">
       <mat-label>Enter your Email</mat-label>
       <input
         matInput
@@ -10,7 +10,7 @@
         required
       />
     </mat-form-field>
-    <mat-form-field appearance="fill" class="mat-form-field">
+    <mat-form-field appearance="fill" class="auth-form-field">
       <mat-label>Enter your Password</mat-label>
       <input
         matInput
@@ -23,7 +23,7 @@
     <button
       mat-raised-button
       color="primary"
-      class="mat-form-button"
+      class="auth-form-button"
       type="submit"
     >
       Submit

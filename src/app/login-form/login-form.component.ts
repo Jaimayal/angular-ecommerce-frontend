@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { TokenResponse } from '../dtos/tokenresponse';
 import { AuthService } from '../services/auth.service';
-import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-login-form',
@@ -12,11 +10,7 @@ import { StorageService } from '../services/storage.service';
 export class LoginFormComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private storageService: StorageService
-  ) {}
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
