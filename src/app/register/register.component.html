@@ -1,0 +1,51 @@
+<div class="authForm">
+  <h1>Create your Account</h1>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="auth-form-field">
+      <mat-label>Enter your Name</mat-label>
+      <input
+        matInput
+        placeholder="Arnoldenra"
+        formControlName="name"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="auth-form-field">
+      <mat-label>Enter your Last Name</mat-label>
+      <input
+        matInput
+        placeholder="Schmedtmar"
+        formControlName="lastname"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="auth-form-field">
+      <mat-label>Enter your Email</mat-label>
+      <input
+        matInput
+        placeholder="pat@example.com"
+        formControlName="email"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="auth-form-field">
+      <mat-label>Enter your Password</mat-label>
+      <input
+        matInput
+        placeholder="********"
+        formControlName="password"
+        required
+        type="password"
+      />
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      class="auth-form-button"
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
