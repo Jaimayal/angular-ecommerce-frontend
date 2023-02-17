@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenResponse } from '../dtos/tokenresponse';
+import { UserRegister } from '../dtos/userregister';
 
 const API_URL = 'http://localhost:8081';
 
@@ -17,11 +18,12 @@ export class ApiService {
     });
   }
 
-  register(email: string, password: string) {
-    return this.http.post<TokenResponse>(API_URL + '/oauth/register', {
-      email,
-      password,
-    });
+  register(userRegister: UserRegister) {
+    console.log(userRegister);
+    return this.http.post<TokenResponse>(
+      API_URL + '/oauth/register',
+      userRegister
+    );
   }
 
   refreshToken(token: string) {

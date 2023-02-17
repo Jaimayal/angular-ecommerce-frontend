@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenResponse } from '../dtos/tokenresponse';
+import { UserRegister } from '../dtos/userregister';
 import { ApiService } from './api.service';
 import { StorageService } from './storage.service';
 
@@ -25,9 +26,9 @@ export class AuthService {
       });
   }
 
-  register(email: string, password: string) {
+  register(userRegister: UserRegister) {
     this.apiService
-      .register(email, password)
+      .register(userRegister)
       .subscribe((tokenResponse: TokenResponse) => {
         const token = tokenResponse.token;
         const tokenType = tokenResponse.tokenType;
